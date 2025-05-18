@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>PROBLEMS LIST</h1>
+        <ul>
+            {% for problem in problems_list%} 
+            <li>
+                <a href="/problem/{{problem.problem_id}}">{{problem.problem_title}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/addproblem">Create New Problem</a>
+        <a href="/logout">Logout</a>
+    </body>
+</html>

@@ -3,15 +3,16 @@ from django.template import loader
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,login as django_login
+from django.contrib.auth import authenticate,login as django_login,logout as django_logout
 from django.contrib.auth.decorators import login_required
+from home.views import home
 # Create your views here.
 def login(request):
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
         if username == '' or password == '':
-            messages.error('Please fill all fields')
+            messages.error(request,'Please fill all fields')
             return redirect('login')
         if not (User.objects.filter(username=username).exists()):
             messages.error(request,'User does not exist')
@@ -33,7 +34,7 @@ def signup(request):
         username=request.POST.get('username')
         password=request.POST.get('password')
         if username == '' or password == '':
-            messages.error('Please fill all fields')
+            messages.error(request,'Please fill all fields')
             return redirect('signup')
         if User.objects.filter(username=username).exists():
             messages.error(request,'User already exists')
@@ -46,6 +47,9 @@ def signup(request):
     template=loader.get_template('signup.html')
     context = {}
     return HttpResponse(template.render(context,request))
+
 @login_required
-def home(request):
-    return HttpResponse('Welcome to the home page')
+def logout(request):
+    django_logout(request)
+    messages.success(request,'Logged out successfully')
+    return redirect('login')
