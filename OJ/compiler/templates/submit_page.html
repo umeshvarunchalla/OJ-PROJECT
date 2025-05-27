@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{problem_title}} submit</title>
+    </head>
+    <body>
+        <h1>Submit code for: {{problem_title}}</h1>
+        <form method="post">
+        {% csrf_token %}
+        <label for="languages">Select language</label>
+        <select id="languages" name="language">
+            <option value="C">C</option>
+            <option value="C++" selected>C++</option>
+            <option value="python">Python</option>
+        </select>
+        <br>
+        <label>Code</label>
+        <textarea name="code" rows="20" cols="100" placeholder="Enter your code here"></textarea>
+        <br>
+        <label>Input</label>
+        <textarea name="input" rows="8" cols="40" placeholder="Enter input here"></textarea>
+        <br>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <br>
+        <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

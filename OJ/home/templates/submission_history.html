@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Submission History</title>
+    </head>
+    <body>
+        <h1>SUBMISSION HISTORY:</h1>
+        <br>
+        {%for submission_id in submission_ids %}
+            <a href ="http://127.0.0.1:8000/submission/{{submission_id}}">{{submission_id}}</a>
+            <br>
+        {% endfor %}
+        {% if submission_ids|length == 0 %}
+            <p>No submissions found.</p>
+        {% endif %}
+    </body>
+</html>
