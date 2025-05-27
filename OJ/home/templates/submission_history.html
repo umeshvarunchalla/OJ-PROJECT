@@ -7,7 +7,7 @@
         <h1>SUBMISSION HISTORY:</h1>
         <br>
         {%for submission_id in submission_ids %}
-            <a href ="http://127.0.0.1:8000/submission/{{submission_id}}">{{submission_id}}</a>
+            <a href ="http://127.0.0.1:8000/submission/{{submission_id}}">Submission{{forloop.counter}}</a>
             <br>
         {% endfor %}
         {% if submission_ids|length == 0 %}
