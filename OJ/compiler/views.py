@@ -80,7 +80,6 @@ def submission_page(request, submission_id):
         'expected_output': submission.expected_output,
         'language': submission.language,
         'status': submission.status,
-        'time': submission.time,
     }
     return HttpResponse(template.render(context, request))
 
@@ -167,5 +166,47 @@ def add_testcase(request, problem_id):
     context = {
         'problem_id': problem_id,
         'problem_title': problem.problem_title,
+    }
+    return HttpResponse(template.render(context, request))
+
+from google import genai
+import os
+from dotenv import load_dotenv
+import markdown2
+@login_required
+def ai_review(request, submission_id):
+    submission = Submission.objects.get(submission_id=submission_id)
+    code= submission.code
+    language = submission.language
+    problem = submission.problem
+
+    load_dotenv()
+    api_key = os.getenv("API_KEY")
+    client = genai.Client(api_key=api_key)
+    review = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents="Give me a brief review for the following code and suggest me changes:\n"
+                + code
+                + "\n written in Language: " + language
+                + "\n for Problem: " + problem.problem_description
+                + "\n where the submission status is: " + submission.status
+                + "\n for the input: " + submission.input
+                + "\n the expected output is: " + submission.expected_output
+                + "\n the output is: " + submission.output,
+    )
+    review_text = review.text
+    review_html = markdown2.markdown(review_text).replace('\n\n','\n')
+    template = loader.get_template('submission_review.html')
+    context = {
+        'problem_id': problem.problem_id,
+        'problem_title': problem.problem_title,
+        'submission_id': submission.submission_id,
+        'code': submission.code,
+        'input': submission.input,
+        'output': submission.output,
+        'expected_output': submission.expected_output,
+        'language': submission.language,
+        'status': submission.status,
+        'review': review_html,
     }
     return HttpResponse(template.render(context, request))
