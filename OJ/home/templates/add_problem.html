@@ -2,6 +2,140 @@
 <html>
     <head>
         <title>Add Problem</title>
+        <style>
+        /* body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f9f9f9;
+        color: #333;
+        }
+
+        ul, ol {
+        padding-left: 20px;
+        margin-bottom: 20px;
+        }
+
+        li {
+        margin-bottom: 8px;
+        }
+
+        textarea {
+        width: 100%;
+        max-width: 1000px;
+        height: 500px;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        }
+
+        button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        }
+
+        button:hover {
+        background-color: #2980b9;
+        }
+
+        a {
+        color: #0077cc;
+        text-decoration: none;
+        font-weight: bold;
+        }
+
+        a:hover {
+        text-decoration: underline;
+        } */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7dfc5;
+            color: #333;
+            padding: 120px;
+            margin-top: -70px;
+        }
+
+        h1 {
+            font-family: poppins, sans-serif;
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #f8cf91;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 300px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        ul.messages {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul.messages li {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        ul.messages li.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        ul.messages li.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        </style>
     </head>
     <body>
         <h1>Add a new problem</h1>

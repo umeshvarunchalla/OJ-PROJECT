@@ -1,65 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{problem_title}} submit</title>
+        <title>Add Testcase</title>
         <style>
-        /* body {
-        font-family: Arial, sans-serif;
-        margin: 40px;
-        background-color: #f9f9f9;
-        color: #333;
-        }
-
-        ul, ol {
-        padding-left: 20px;
-        margin-bottom: 20px;
-        }
-
-        li {
-        margin-bottom: 8px;
-        }
-
-        textarea {
-        width: 100%;
-        max-width: 1000px;
-        height: 500px;
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
-        }
-
-        button {
-        padding: 10px 20px;
-        margin-top: 10px;
-        background-color: #3498db;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        }
-
-        button:hover {
-        background-color: #2980b9;
-        }
-
-        a {
-        color: #0077cc;
-        text-decoration: none;
-        font-weight: bold;
-        }
-
-        a:hover {
-        text-decoration: underline;
-        } */
         body {
             font-family: Arial, sans-serif;
             background-color: #f7dfc5;
             color: #333;
-            padding: 40px;
+            padding: 120px;
+            margin-top: -70px;
         }
 
         h1 {
@@ -82,19 +31,7 @@
             display: block;
             font-weight: bold;
             margin-top: 20px;
-            margin-bottom: 8px;
-        }
-
-        select {
-            width: 10%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            background-color: #fff;
-            margin-bottom: 20px;
-            
+            margin-bottom: 10px;
         }
 
         textarea {
@@ -149,28 +86,21 @@
         </style>
     </head>
     <body>
-        <h1>Submit code for: {{problem_title}}</h1>
+        <h1> Add testcase for {{problem_id}}:{{problem_title}}</h1>
         <form method="post">
-        {% csrf_token %}
-        <label for="languages">Select language</label>
-        <select id="languages" name="language">
-            <option value="C">C</option>
-            <option value="C++" selected>C++</option>
-            <option value="python">Python</option>
-        </select>
-        <br>
-        <label>Code</label>
-        <textarea name="code" rows="30" cols="200" placeholder="Enter your code here"></textarea>
-        <br>
-        {% if messages %}
+            {% csrf_token %}
+            <label for="input">Input:</label>
+            <textarea id="input" name="input" rows="10" cols="50" placeholder="Enter the Input"></textarea><br>
+            <label for="output">Output:</label>
+            <textarea id="output" name="output" rows="10" cols="50" placeholder="Enter the Output"></textarea><br>
+            <button type="submit">Add Testcase</button>
+            {% if messages %}
             <ul class="messages">
             {% for message in messages %}
             <li class="{{ message.tags }}">{{ message }}</li>
             {% endfor %}
             </ul>
-        {% endif %}
-        <br>
-        <button type="submit">Submit</button>
+            {% endif %}
         </form>
     </body>
 </html>

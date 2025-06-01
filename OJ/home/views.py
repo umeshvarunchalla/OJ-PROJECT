@@ -23,6 +23,7 @@ def problem_detail(request, problem_id):
         'problem_title': problem.problem_title,
         'problem_description': problem.problem_description,
         'problem_id': problem.problem_id,
+        'problem_author': problem.problem_author.username,
     }
     template=loader.get_template('problem_page.html')
     return HttpResponse(template.render(context, request))

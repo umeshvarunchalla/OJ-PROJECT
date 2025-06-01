@@ -2,20 +2,89 @@
 <html>
     <head>
         <title>Home</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7dfc5;
+            color: #333;
+            padding: 80px;
+            margin: 0;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        li {
+            background-color: #f8cf91;
+            margin-bottom: 15px;
+            padding: 16px 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        li:hover {
+            background-color: #f4ba63;
+            transform: translateY(-2px);
+        }
+
+        li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            margin: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        </style>
     </head>
     <body>
         <h1>PROBLEMS LIST</h1>
         <ul>
-            {% for problem in problems_list%} 
+            {% for problem in problems_list %}
             <li>
                 <a href="/problem/{{problem.problem_id}}">{{problem.problem_title}}</a>
             </li>
             {% endfor %}
         </ul>
-        <a href="/addproblem">Create New Problem</a>
-        <br>
-        <a href="/submission_history">Submission History</a>
-        <br>
-        <a href="/logout">Logout</a>
+
+        <div class="buttons">
+            <a href="/addproblem" class="button">Create New Problem</a>
+            <a href="/submission_history" class="button">Submission History</a>
+            <a href="/logout" class="button" style="background-color: rgb(240, 44, 30);">Logout</a>
+        </div>
     </body>
 </html>

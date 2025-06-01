@@ -25,6 +25,8 @@ def login(request):
             django_login(request,user)
             messages.success(request,'Logged in successfully')
             return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('logout')
     template=loader.get_template('login.html')
     context = {}
     return HttpResponse(template.render(context,request))

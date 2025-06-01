@@ -2,10 +2,94 @@
 <html>
     <head>
         <title>{{problem_title}}</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7dfc5;
+            color: #333;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            /* margin: 12px 0 4px 0;
+            font-weight: bold; */
+        }
+
+        .button {
+            background-color: #048121;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            margin: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #28ce4f;
+        }
+
+        ul.messages {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul.messages li {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        ul.messages li.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        ul.messages li.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        </style>
     </head>
     <body>
         <h1>{{problem_title}}</h1>
+        <label>Description</label>
         <p>{{problem_description}}</p>
-        <a href="http://127.0.0.1:8000/submit_page/{{problem_id}}">submit</a>
+        <a class="button" href="http://127.0.0.1:8000/submit_page/{{problem_id}}">submit</a>
+        {% if request.user.username == problem_author %}
+        <a class="button" style="background-color: #3498db;" href="http://127.0.0.1:8000/add_testcase/{{problem_id}}">Add Testcase</a>
+        {% endif %}
+        <a class="button" href="http://127.0.0.1:8000/home" style="background-color: rgb(240, 44, 30);">Problems list</a>
+        <br>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
     </body>
 </html>

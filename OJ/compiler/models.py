@@ -14,3 +14,8 @@ class Submission(models.Model):
     expected_output=models.TextField(blank=True, null=True)
     status=models.CharField(max_length=100)
     time=models.CharField(max_length=100)
+
+class Testcase(models.Model):
+    problem=models.ForeignKey(Problem, on_delete=models.CASCADE)
+    input=models.TextField()
+    output=models.TextField()

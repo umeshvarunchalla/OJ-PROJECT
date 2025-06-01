@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import loader
 from home.models import Problem
-from .models import Submission
+from .models import Submission,Testcase
 from .templates import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,28 +12,48 @@ def submit_page(request, problem_id):
     if request.method=='POST':
         code = request.POST.get('code')
         language = request.POST.get('language')
-        input_data = request.POST.get('input')
         problem = Problem.objects.get(problem_id=problem_id)
         if not code:
             messages.error(request, 'Code is required.')
             return redirect('submit_page', problem_id=problem_id)
         else:
-            output =run_code(code, language, input_data)
+            submission_input=""
+            submission_status = "Pending"
+            submission_output = ""
+            submission_expected_output = ""
+            Testcases = Testcase.objects.filter(problem=problem)
+            if Testcases.exists():
+                for idx, testcase in enumerate(Testcases, start=1):
+                    submission_input +=f"Testcase{idx}:\n"+ testcase.input + "\n"
+                    submission_expected_output += f"Testcase{idx}:\n"+testcase.output + "\n"
+                    input_data = testcase.input
+                    expected_output = testcase.output
+                    output =run_code(code, language, input_data)
+                    if output == "Compilation Error":
+                        submission_status = "Compilation Error"
+                        break
+                    elif output == "Runtime Error":
+                        submission_status = "Runtime Error"
+                        break
+                    elif output.strip() != expected_output.strip():
+                        submission_status = "Wrong Answer"
+                        submission_output += f"Testcase{idx}:\n" + output + "\n"
+                        break
+                    else:
+                        submission_output += f"Testcase{idx}:\n" + output + "\n"
             submission = Submission(
                 problem=problem,
                 user=request.user,
                 code=code,
                 language=language,
-                input=input_data,
-                output=output,
-                expected_output='',
+                input=submission_input,
+                output=submission_output,
+                expected_output=submission_expected_output,
                 status='Pending',
                 time='0'
             )
-            if output == "Compilation Error":
-                submission.status = "Compilation Error"
-            elif output == "Runtime Error":
-                submission.status = "Runtime Error"
+            if submission_status != "Pending":
+                submission.status = submission_status
             else:
                 submission.status = "Accepted"
             submission.save()
@@ -123,3 +143,29 @@ def run_code(code, language, input_data):
     with open(output_path, 'r') as output_file:
         output = output_file.read()
     return output
+
+@login_required
+def add_testcase(request, problem_id):
+    if request.method == 'POST':
+        input_data = request.POST.get('input')
+        output_data = request.POST.get('output')
+        problem = Problem.objects.get(problem_id=problem_id)
+        if not output_data:
+            messages.error(request,'Output is required.')
+            return redirect('add_testcase', problem_id=problem_id)
+        else:
+            testcase = Testcase(
+                problem=problem,
+                input=input_data,
+                output=output_data
+            )
+            testcase.save()
+            messages.success(request, 'Testcase added successfully.')
+            return redirect('problem_detail', problem_id=problem_id)
+    template = loader.get_template('add_testcase.html')
+    problem = Problem.objects.get(problem_id=problem_id)
+    context = {
+        'problem_id': problem_id,
+        'problem_title': problem.problem_title,
+    }
+    return HttpResponse(template.render(context, request))
