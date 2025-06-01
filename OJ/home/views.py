@@ -47,8 +47,13 @@ from compiler.models import Submission
 def submission_history(request):
     submissions = Submission.objects.filter(user=request.user)
     submission_ids = [submission.submission_id for submission in submissions]
+    statuses = [submission.status for submission in submissions]
+    problem_ids = [submission.problem.problem_id for submission in submissions]
+    problem_titles = [submission.problem.problem_title for submission in submissions]
+    languages = [submission.language for submission in submissions]
+    combined_data=zip(submission_ids,statuses, problem_ids, problem_titles, languages)
     context = {
-        'submission_ids': submission_ids,
+        'combined_data':combined_data,
     }
     template = loader.get_template('submission_history.html')
     return HttpResponse(template.render(context, request))
