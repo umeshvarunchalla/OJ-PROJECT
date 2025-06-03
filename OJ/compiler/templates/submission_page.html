@@ -89,7 +89,7 @@
         <p>Expected Output:</p>
         <br>
         <div class=section-box style="white-space: pre-wrap; font-family: monospace;">{{expected_output|escape}}</div>
-        <a href="http://127.0.0.1:8000/submission_ai_review/{{submission_id}}" style="text-decoration: none;">
+        <a href="{% url 'ai_review' submission_id=submission_id %}" style="text-decoration: none;">
             <button>🤖 AI REVIEW</button>
         </a>
 

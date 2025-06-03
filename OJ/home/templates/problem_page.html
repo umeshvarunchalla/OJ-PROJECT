@@ -77,12 +77,12 @@
     <body>
         <h1>{{problem_title}}</h1>
         <label>Description</label>
-        <p>{{problem_description}}</p>
-        <a class="button" href="http://127.0.0.1:8000/submit_page/{{problem_id}}">submit</a>
+        <p style="white-space: pre-wrap; font-family: monospace;">{{problem_description|escape}}</p>
+        <a class="button" href="{% url 'submit_page' problem_id=problem_id %}">submit</a>
         {% if request.user.username == problem_author %}
-        <a class="button" style="background-color: #3498db;" href="http://127.0.0.1:8000/add_testcase/{{problem_id}}">Add Testcase</a>
+        <a class="button" style="background-color: #3498db;" href="{% url 'add_testcase' problem_id=problem_id %}">Add Testcase</a>
         {% endif %}
-        <a class="button" href="http://127.0.0.1:8000/home" style="background-color: rgb(240, 44, 30);">Problems list</a>
+        <a class="button" href="{% url 'home' %}" style="background-color: rgb(240, 44, 30);">Problems list</a>
         <br>
         {% if messages %}
             <ul class="messages">

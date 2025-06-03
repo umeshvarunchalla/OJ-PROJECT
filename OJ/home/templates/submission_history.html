@@ -169,10 +169,10 @@
         {% for submission_id, status, problem_id, title, lang in combined_data %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="http://127.0.0.1:8000/problem/{{ problem_id }}">{{ title }}</a></td>
+                <td><a href="{% url 'problem_detail' problem_id=problem_id %}">{{ title }}</a></td>
                 <td>{{ lang }}</td>
                 <td>{{ status }}</td>
-                <td><a href="http://127.0.0.1:8000/submission/{{ submission_id }}">View Submission</a></td>
+                <td><a href="{% url 'submission_page' submission_id=submission_id %}">View Submission</a></td>
             </tr>
         {% endfor %}
         </table>
