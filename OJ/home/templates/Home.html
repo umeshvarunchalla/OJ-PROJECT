@@ -1,8 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Home</title>
         <style>
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f7dfc5;
@@ -19,32 +24,57 @@
             text-align: center;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            max-width: 800px;
+        table {
+            width: 90%;
+            max-width: 1000px;
             margin: auto;
-        }
-
-        li {
-            background-color: #f8cf91;
-            margin-bottom: 15px;
-            padding: 16px 24px;
-            border-radius: 10px;
+            border-collapse: collapse;
+            background-color: #fff5e1;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        li:hover {
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+        }
+
+        th {
             background-color: #f4ba63;
-            transform: translateY(-2px);
+            color: #2c3e50;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
         }
 
-        li a {
-            text-decoration: none;
+        tr:nth-child(odd) {
+            background-color: #f8cf91; 
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff0d5;
+        }
+
+        tr:nth-child(odd):hover {
+            background-color: #f9ddb2;
+            transition: background-color 0.2s ease;
+        }
+
+        tr:nth-child(even):hover {
+            background-color: #f9ddb2;
+            transition: background-color 0.2s ease;
+        }
+
+        td a {
             color: #2c3e50;
             font-weight: bold;
+        }
+
+        p {
+            text-align: center;
             font-size: 18px;
+            margin-top: 40px;
+            color: #555;
         }
 
         .buttons {
@@ -67,24 +97,34 @@
 
         .button:hover {
             background-color: #2980b9;
-        }
-
+        } 
         </style>
     </head>
     <body>
         <h1>PROBLEMS LIST</h1>
-        <ul>
-            {% for problem in problems_list %}
-            <li>
-                <a href="/problem/{{problem.problem_id}}">{{problem.problem_title}}</a>
-            </li>
-            {% endfor %}
-        </ul>
-
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <table>
+            <tr>
+                <th>S.No.</th>
+                <th>Problem Title</th>
+                <th>Status</th>
+            </tr>
+        {% for  problem, status in combined_data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'problem_detail' problem_id=problem.problem_id %}">{{ problem.problem_title }}</a></td>
+                <td>{{ status }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+<!-- 
         <div class="buttons">
-            <a href="/addproblem" class="button">Create New Problem</a>
-            <a href="/submission_history" class="button">Submission History</a>
-            <a href="/logout" class="button" style="background-color: rgb(240, 44, 30);">Logout</a>
-        </div>
+            <a href="{% url 'add_problem' %}" class="button">Create New Problem</a>
+            <a href="{% url 'submission_history' %}" class="button">Submission History</a>
+            <a href="{% url 'logout' %}" class="button" style="background-color: rgb(240, 44, 30);">Logout</a>
+        </div> -->
     </body>
 </html>
+{% endblock content %}

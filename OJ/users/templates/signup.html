@@ -6,192 +6,207 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
         <style>
             body {
-    font-family: 'Raleway', sans-serif;
-    background-color: #e7e7e7;
-}
-.wrapper {
-    width: 800px;
-    height: 600px;
-    position: relative;
-    margin: 3% auto;
-    box-shadow: 2px 18px 70px 0px #9D9D9D;
-    overflow: hidden;
-}
+                font-family: 'Poppins', sans-serif;
+                background-color: #f2cfa1;
+                margin: 0;
+                color: #2c3e50;
+            }
 
-.login-text {
-    width: 800px;
-    height:450px;
-    background: linear-gradient(to left, #ab68ca, #de67a3); 
-    position: absolute;
-    top: -300px;
-    box-sizing: border-box;
-    padding: 6%;
-    transition: all 0.5s ease-in-out;
-    z-index: 11;
-}
+            .wrapper {
+                width: 800px;
+                height: 600px;
+                position: relative;
+                margin: 3% auto;
+                box-shadow: 2px 18px 70px 0px #c29558;
+                overflow: hidden;
+                border-radius: 16px;
+                background-color: #fff3e0;
+            }
 
-.text {
-    margin-left: 20px;
-    color: #fff;
-    display: none;
-    transition: all 0.5s ease-in-out;
-    transition-delay: 0.3s;
+            .login-text {
+                width: 800px;
+                height: 450px;
+                background: linear-gradient(to left, #f4a259, #f4ba63);
+                position: absolute;
+                top: -300px;
+                box-sizing: border-box;
+                padding: 6%;
+                transition: all 0.5s ease-in-out;
+                z-index: 11;
+                border-bottom: 3px solid #f0c179;
+            }
 
-    a, a:visited {
-        font-size: 36px;
-        color: #fff;
-        text-decoration: none;  
-        font-weight: bold;
-        display: block;
-    }
+            .text {
+                margin-left: 20px;
+                color: #2c3e50;
+                display: none;
+                transition: all 0.5s ease-in-out;
+                transition-delay: 0.3s;
+            }
 
-    hr {
-        width: 10%;
-        float: left;
-        background-color: #fff;
-        font-size: 16px;
-    }
+            .text a {
+                font-size: 36px;
+                color: #070707;
+                text-decoration: none;
+                font-weight: bold;
+                display: block;
+            }
 
-    input {
-        margin-top: 30px;
-        height: 40px;
-        width: 300px;
-        border-radius: 2px;
-        border: none;
-        background-color: #444;
-        opacity: 0.6;
-        outline: none;
-        color: #fff;
-        padding-left: 10px;
-    }
+            .text hr {
+                width: 10%;
+                float: left;
+                background-color: #0a0a0a;
+                font-size: 16px;
+                height: 2px;
+                border: none;
+            }
 
-    input[type=text] {
-        margin-top: 60px;
-    }
+            .text input {
+                margin-top: 30px;
+                height: 40px;
+                width: 300px;
+                border-radius: 6px;
+                border: 1px solid #d98e3f;
+                background-color: #fffaf3;
+                outline: none;
+                color: #2c3e50;
+                padding-left: 10px;
+                font-weight: 500;
+            }
 
-    button {
-        margin-top: 60px;
-        height: 40px;
-        width: 140px;
-        outline: none;
-    }
+            .text input[type=text] {
+                margin-top: 60px;
+            }
 
-    .login-btn {
-        background: transparent;
-        border: 2px solid #fff;;
-        border-radius: 2px;
-        color: #fff;
-        margin-left: 30px;
-    }
+            .text button.signup-btn {
+                margin-top: 60px;
+                height: 40px;
+                width: 140px;
+                border: none;
+                border-radius: 20px;
+                background: #eb8b31;
+                color: #fff;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
 
-    .signup-btn {
-        background: #fff;
-        border: none;
-        border-radius: 2px;
-        color: #696a86;
-    }
-}
+            .text button.signup-btn:hover {
+                background: #d9822f;
+            }
 
-.cta {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #696a86;
-    border: 2px solid #fff;
-    position: absolute;
-    bottom: -30px;
-    left: 370px;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    z-index: 11;
-}
+            .cta {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: #f2cfa1;
+                border: 2px solid #f4a259;
+                position: absolute;
+                bottom: -30px;
+                left: 370px;
+                color: #fff;
+                outline: none;
+                cursor: pointer;
+                z-index: 11;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 18px;
+            }
 
-.call-text {
-    background-color: #fff;
-    width: 800px;
-    height: 450px;
-    position: absolute;
-    bottom: 0;
-    padding: 10%;
-    box-sizing: border-box;
-    text-align: center;
+            .call-text {
+                background-color: #fff0db;
+                width: 800px;
+                height: 450px;
+                position: absolute;
+                bottom: 0;
+                padding: 10%;
+                box-sizing: border-box;
+                text-align: center;
+            }
 
-    h1 {
-        font-size: 42px;
-        margin-top: 10%;
-        color: #696a86;
+            .call-text h1 {
+                font-size: 42px;
+                margin-top: 10%;
+                color: #2c3e50;
+            }
 
-        span {
-            color: #333;
-            font-weight: bolder;
-            
-        }
-    }
+            .call-text h1 span {
+                color: #f4a259;
+                font-weight: bolder;
+            }
 
-    button {
-        height: 40px;
-        width: 180px;
-        border: none;
-        border-radius: 20px;
-        background: linear-gradient(to left, #ab68ca, #de67a3); 
-        color: #fff;
-        font-weight: bolder;
-        margin-top: 30px;
-        cursor: pointer;
-        outline: none;
-    }
-}
+            .call-text button {
+                height: 40px;
+                width: 180px;
+                border: none;
+                border-radius: 20px;
+                background: linear-gradient(to left, #f4a259, #f4ba63);
+                color: #fff;
+                font-weight: bolder;
+                margin-top: 30px;
+                cursor: pointer;
+                outline: none;
+                transition: background-color 0.3s ease;
+            }
 
-.show-hide {
-    display: block;
-}
+            .call-text button:hover {
+                background: #d9822f;
+            }
 
-.expand {
-    transform: translateY(300px);
-}
+            .call-text a {
+                color: #d9822f;
+                font-weight: bold;
+            }
 
+            .show-hide {
+                display: block;
+            }
+
+            .expand {
+                transform: translateY(300px);
+            }
         </style>
         <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var cta = document.querySelector(".cta");
-    var login_signup = document.querySelector(".login-signup");
-    var check = 0;
+            document.addEventListener("DOMContentLoaded", function() {
+                var cta = document.querySelector(".cta");
+                var login_signup = document.querySelector(".login-signup");
+                var check = 0;
 
-    cta.addEventListener('click', function(e){
-        var text = document.querySelector(".text");
-        var loginText = document.querySelector(".login-text");
-        text.classList.toggle('show-hide');
-        loginText.classList.toggle('expand');
-        if(check == 0)
-        {
-            cta.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
-            check++;
-        }
-        else
-        {
-            cta.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
-            check = 0;
-        }
-    });
-    login_signup.addEventListener('click', function(e){
-        var text = document.querySelector(".text");
-        var loginText = document.querySelector(".login-text");
-        text.classList.toggle('show-hide');
-        loginText.classList.toggle('expand');
-        if(check == 0)
-        {
-            cta.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
-            check++;
-        }
-        else
-        {
-            cta.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
-            check = 0;
-        }
-    });
-});
-</script>
+                cta.addEventListener('click', function(e){
+                    var text = document.querySelector(".text");
+                    var loginText = document.querySelector(".login-text");
+                    text.classList.toggle('show-hide');
+                    loginText.classList.toggle('expand');
+                    if(check == 0)
+                    {
+                        cta.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
+                        check++;
+                    }
+                    else
+                    {
+                        cta.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
+                        check = 0;
+                    }
+                });
+                login_signup.addEventListener('click', function(e){
+                    var text = document.querySelector(".text");
+                    var loginText = document.querySelector(".login-text");
+                    text.classList.toggle('show-hide');
+                    loginText.classList.toggle('expand');
+                    if(check == 0)
+                    {
+                        cta.innerHTML = "<i class=\"fas fa-chevron-up\"></i>";
+                        check++;
+                    }
+                    else
+                    {
+                        cta.innerHTML = "<i class=\"fas fa-chevron-down\"></i>";
+                        check = 0;
+                    }
+                });
+            });
+        </script>
 
     </head>
     <body>
@@ -224,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="call-text">
             <h1>Welcome to <span>OJ!</span></h1>
             <button class="login-signup">SignUp</button>
+            <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
             </div>
         </div>
     </body>

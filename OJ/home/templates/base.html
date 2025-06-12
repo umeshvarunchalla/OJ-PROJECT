@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}OJ!{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7dfc5;
+            color: #333;
+            margin: 0;
+            padding-top: 80px; /* for fixed navbar space */
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f4ba63;
+            color: #2c3e50;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #000;
+        }
+
+        .nav-left {
+            display: flex;
+            float: left;
+            margin-left: 10px;
+            align-items: center;
+        }
+
+        .nav-right .logout {
+            background-color: #e74c3c;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-right: 0;
+        }
+
+        .nav-right .logout:hover {
+            background-color: #c0392b;
+        }
+
+        .container {
+            padding: 20px 40px;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-left">
+            <a href="{% url 'home' %}">Problems List</a>
+            <a href="{% url 'add_problem' %}">Create new Problem</a>
+            <a href="{% url 'submission_history' %}">Submission History</a>
+            <a href="{% url 'compiler'%}">Compiler</a>
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'logout' %}" class="logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}
+        <!-- page-specific content will go here -->
+        {% endblock %}
+    </div>
+
+</body>
+</html>

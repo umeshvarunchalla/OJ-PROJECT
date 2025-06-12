@@ -6,12 +6,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import ProblemForm
 from .templates import *
+from compiler.models import Submission
 # Create your views here.
 @login_required
 def home(request):
-    problems_list = Problem.objects.all()
+    problems_list = list(Problem.objects.all())
+    status_list=["unattempted" for _ in problems_list]
+    submissions= Submission.objects.filter(user=request.user)
+    for submission in submissions:
+        problem_index= problems_list.index(submission.problem)
+        if status_list[problem_index]== "unattempted":
+            if submission.status == "Accepted":
+                status_list[problem_index] = "solved"
+            else:
+                status_list[problem_index] = "attempted"
+        elif status_list[problem_index] == "attempted":
+            if submission.status == "Accepted":
+                status_list[problem_index] = "solved"
+    problems_list = zip(problems_list, status_list)
     context = {
-        'problems_list': problems_list,
+        'combined_data': problems_list,
     }
     template=loader.get_template('home.html')
     return HttpResponse(template.render(context, request))

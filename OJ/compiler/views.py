@@ -88,6 +88,8 @@ import subprocess
 from django.conf import settings
 import uuid
 def run_code(code, language, input_data):
+    if input_data is None:
+        input_data = ""
     proj_dir=Path(settings.BASE_DIR)
     directories=['codes','inputs','outputs']
     for directory in directories:
@@ -210,3 +212,26 @@ def ai_review(request, submission_id):
         'review': review_html,
     }
     return HttpResponse(template.render(context, request))
+
+def compiler(request):
+    if request.method=='POST':
+        code=request.POST.get('code')
+        language=request.POST.get('language')
+        input_data=request.POST.get('input')
+        output = run_code(code, language, input_data)
+        context={
+            "code": code,
+            "language": language,
+            "input": input_data,
+            "output": output,
+        }
+        return render(request, 'compiler.html', context)
+    else:
+        template = loader.get_template('compiler.html')
+        context = {
+            "code": '',
+            "language": '',
+            "input": '',
+            "output": '',
+        }
+        return HttpResponse(template.render(context, request))
